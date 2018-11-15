@@ -1,8 +1,10 @@
 package com.ulya.restaurant;
 
-public interface Position {
+public interface Dish {
 
     int getPrice();
+
+    int getId();
 
     String getName();
 

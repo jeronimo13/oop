@@ -2,14 +2,14 @@ package com.ulya.restaurant;
 
 public class Menu {
 
-    private Position[] positions;
+    private Dish[] dishes;
 
 
-    public Menu(Position[] positions) {
-        this.positions = positions;
+    public Menu(Dish[] dishes) {
+        this.dishes = dishes;
     }
 
-    public Position[] getPositions() {
-        return positions;
+    public Dish[] getDishes() {
+        return dishes;
     }
 }

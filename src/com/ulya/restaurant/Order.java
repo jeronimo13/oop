@@ -2,11 +2,11 @@ package com.ulya.restaurant;
 
 public class Order {
 
-    private Position[] positions;
+    private Dish[] dishes;
     String name;
 
-    public Order(Position[] positions) {
-        this.positions = positions;
+    public Order(Dish[] dishes) {
+        this.dishes = dishes;
     }
 
 //
@@ -22,8 +22,8 @@ public class Order {
 
     public int getPrice() {
         int price = 0;
-        for (int i = 0; i < positions.length; i++) {
-            price = price + positions[i].getPrice();
+        for (int i = 0; i < dishes.length; i++) {
+            price = price + dishes[i].getPrice();
         }
         return price;
     }

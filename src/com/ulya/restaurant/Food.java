@@ -1,15 +1,17 @@
 package com.ulya.restaurant;
 
 
-public class Food implements Position {
+public class Food implements Dish {
 
 
     private int price;
     private String name;
+    private int id;
 
-    public Food(int price, String name) {
+    public Food(int price, String name, int id) {
         this.price = price;
         this.name = name;
+        this.id = id;
     }
 
     @Override
@@ -25,5 +27,10 @@ public class Food implements Position {
     @Override
     public void consume() {
         System.out.println("You've just ate " + name);
+    }
+
+    @Override
+    public int getId(){
+        return id;
     }
 }

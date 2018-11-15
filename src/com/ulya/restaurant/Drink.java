@@ -1,16 +1,16 @@
 package com.ulya.restaurant;
 
-public class Drink implements Position {
-
-
+public class Drink implements Dish {
 
     private String name;
     private int price;
+    private int id;
 
 
-    public Drink(String name, int price) {
+    public Drink(String name, int price, int id) {
         this.name = name;
         this.price = price;
+        this.id = id;
     }
 
     @Override
@@ -26,5 +26,10 @@ public class Drink implements Position {
     @Override
     public void consume() {
         System.out.println("You've just drunk " + name);
+    }
+
+    @Override
+    public int getId(){
+        return id;
     }
 }
