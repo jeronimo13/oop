@@ -1,5 +1,10 @@
 package com.ulya.restaurant;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
 public class Main {
 
 
@@ -24,40 +29,6 @@ public class Main {
         System.out.println("Herman to pay: " + hermanOrderPrice);
         System.out.println("Ulya to pay: " + ulyaOrderPrice);
 
-        int[] dishCount = new int[restaurant.getMenu().getDishes().length];
-
-        for (int i = 0; i < hermanOrderDishes.length - 1; i++) {
-            Dish hermanOrderDish = hermanOrderDishes[i];
-            int posInArr = hermanOrderDish.getId();
-            int count = dishCount[posInArr];
-            count++;
-            dishCount[posInArr] = count;
-        }
-
-//        for (Dish hermanOrderDish : hermanOrderDishes) {
-//            dishCount[hermanOrderDish.getId()] = ++dishCount[hermanOrderDish.getId()];
-//        }
-
-        for (Dish ulyaOrderDish : ulyaOrderDishes) {
-            dishCount[ulyaOrderDish.getId()] = ++dishCount[ulyaOrderDish.getId()];
-        }
-
-
-        int total = 0;
-
-        System.out.println("Item\t\tquantity\t\tprice");
-        for (Dish dish : restaurant.getMenu().getDishes()) {
-            int count = dishCount[dish.getId()];
-            if (count != 0) {
-                int price = count * dish.getPrice();
-                System.out.format("%10s%10d%11s", dish.getName(), count, price);
-                System.out.println();
-                total += price;
-            }
-        }
-        System.out.println("Total\t" + total);
-
-
     }
 
 
@@ -79,7 +50,6 @@ public class Main {
     }
 
     static Restaurant openRestaurant() {
-        Restaurant restaurant = new Restaurant(createMenu());
-        return restaurant;
+        return new Restaurant(createMenu());
     }
 }
