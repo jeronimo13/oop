@@ -1,11 +1,13 @@
 package com.ulya.restaurant;
 
+import java.util.List;
+
 public class Order {
 
-    private Dish[] dishes;
+    private List<Dish> dishes;
     String name;
 
-    public Order(Dish[] dishes) {
+    public Order(List<Dish> dishes) {
         this.dishes = dishes;
     }
 
@@ -22,8 +24,8 @@ public class Order {
 
     public int getPrice() {
         int price = 0;
-        for (int i = 0; i < dishes.length; i++) {
-            price = price + dishes[i].getPrice();
+        for (Dish dish : dishes) {
+            price += dish.getPrice();
         }
         return price;
     }

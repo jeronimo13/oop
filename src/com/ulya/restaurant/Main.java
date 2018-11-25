@@ -13,11 +13,16 @@ public class Main {
 
         Menu menu = restaurant.getMenu();
 
-        Dish[] dishes = menu.getDishes();
+        List<Dish> dishes = menu.getDishes();
 
 
-        Dish[] hermanOrderDishes = {dishes[0], dishes[3]};
-        Dish[] ulyaOrderDishes = {dishes[1], dishes[4], dishes[3]};
+        List<Dish> hermanOrderDishes = new ArrayList<>();
+        hermanOrderDishes.add(dishes.get(0));
+        hermanOrderDishes.add(dishes.get(3));
+        List<Dish> ulyaOrderDishes = new ArrayList<>();
+        ulyaOrderDishes.add(dishes.get(1));
+        ulyaOrderDishes.add(dishes.get(4));
+        ulyaOrderDishes.add(dishes.get(3));
 
         Order hermanOrder = new Order(hermanOrderDishes);
         Order ulyaOrder = new Order(ulyaOrderDishes);
@@ -42,11 +47,15 @@ public class Main {
         Drink tea = new Drink("Tea", 9, 4);
         Drink vodka = new Drink("Vodka", 50, 5);
 
-        Dish[] dishes = {breakfast, lunch, dinner, coffee, tea, vodka};
+        List<Dish> dishes = new ArrayList<>();
+        dishes.add(breakfast);
+        dishes.add(lunch);
+        dishes.add(dinner);
+        dishes.add(coffee);
+        dishes.add(tea);
+        dishes.add(vodka);
 
-        Menu menu = new Menu(dishes);
-
-        return menu;
+        return new Menu(dishes);
     }
 
     static Restaurant openRestaurant() {
