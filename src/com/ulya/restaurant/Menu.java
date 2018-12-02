@@ -1,15 +1,17 @@
 package com.ulya.restaurant;
 
+import java.util.List;
+
 public class Menu {
 
-    private Dish[] dishes;
+    private List<Dish> dishes;
 
 
-    public Menu(Dish[] dishes) {
+    public Menu(List<Dish> dishes) {
         this.dishes = dishes;
     }
 
-    public Dish[] getDishes() {
+    public List<Dish> getDishes() {
         return dishes;
     }
 }
