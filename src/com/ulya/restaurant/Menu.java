@@ -1,17 +1,18 @@
 package com.ulya.restaurant;
 
 import java.util.List;
+import java.util.Map;
 
 public class Menu {
 
-    private List<Dish> dishes;
+    private Map<String, Dish> dishes;
 
 
-    public Menu(List<Dish> dishes) {
+    public Menu(Map<String, Dish> dishes) {
         this.dishes = dishes;
     }
 
-    public List<Dish> getDishes() {
+    public Map<String, Dish> getDishes() {
         return dishes;
     }
 }
