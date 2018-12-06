@@ -6,5 +6,5 @@ public interface PeekIterator<E> extends Iterator<E> {
 
     boolean hasPrev();
 
-    E prev();
+    E peek();
 }

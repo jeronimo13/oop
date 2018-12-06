@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class PeekIteratorTest {
@@ -15,7 +15,7 @@ public class PeekIteratorTest {
 
     @Before
     public void setup(){
-        nameList = new ArrayList<>();
+        nameList = new LinkedList<>();
         nameList.add("Masha");
         nameList.add("Ulya");
         nameList.add("Gera");
@@ -26,7 +26,9 @@ public class PeekIteratorTest {
         PeekIterator<String> peekIterator = new PeekIteratorImpl<>(nameList.iterator());
         Assert.assertFalse(peekIterator.hasPrev());
 
-        peekIterator.next();
+        String masha = peekIterator.next();
+
+        Assert.assertEquals("Masha", masha);
 
         Assert.assertTrue(peekIterator.hasPrev());
     }
@@ -34,11 +36,11 @@ public class PeekIteratorTest {
     @Test
     public void prevTest(){
         PeekIterator<String> peekIterator = new PeekIteratorImpl<>(nameList.iterator());
-        Assert.assertNull(peekIterator.prev());
+        Assert.assertNull(peekIterator.peek());
 
         peekIterator.next();
 
-        Assert.assertNotNull(peekIterator.prev());
+        Assert.assertNotNull(peekIterator.peek());
     }
 
     //TODO: add more tests
