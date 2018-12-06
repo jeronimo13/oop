@@ -18,6 +18,7 @@ public class PeekIteratorTest {
         nameList = new LinkedList<>();
         nameList.add("Masha");
         nameList.add("Ulya");
+        nameList.add(null);
         nameList.add("Gera");
     }
 
@@ -43,6 +44,26 @@ public class PeekIteratorTest {
         Assert.assertNotNull(peekIterator.peek());
     }
 
-    //TODO: add more tests
+    @Test
+    public void nullTest(){
+        PeekIterator<String> peekIterator = new PeekIteratorImpl<>(nameList.iterator());
+
+        peekIterator.next();
+        peekIterator.next();
+        peekIterator.next();
+
+        Assert.assertFalse(peekIterator.hasPrev());
+    }
+    @Test
+    public void peekTest(){
+        PeekIterator<String> peekIterator = new PeekIteratorImpl<>(nameList.iterator());
+        peekIterator.peek();
+        peekIterator.peek();
+        peekIterator.peek();
+        peekIterator.next();
+
+
+        Assert.assertTrue(peekIterator.hasPrev());
+    }
 
 }
