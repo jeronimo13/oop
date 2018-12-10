@@ -8,13 +8,11 @@ import java.util.Map;
 public class Utils {
     public static int factorialLoop(int number) {
         int result = 1;
-        if (number == 0) {
-            return 0;
-        }
-        if (number < 0){
+
+        if (number < 0) {
             throw new IllegalArgumentException();
         }
-        if (number>1) {
+        if (number > 1) {
             for (int i = 1; i <= number; i++) {
                 result = result * i;
             }
@@ -23,40 +21,47 @@ public class Utils {
     }
 
     public static int factorialRec(int n) {
-        int result;
-        if (n == 0) {
-            return 0;
-        }
-        if (n < 0){
+        int result = 1;
+
+        if (n < 0) {
             throw new IllegalArgumentException();
         }
-        if (n == 1){
-            return 1;
+        if (n>1) {
+            result = factorialRec(n - 1) * n;
         }
-        result = factorialRec(n - 1) * n;
-
         return result;
     }
 
     public static String getRandomElement(List<String> list) {
         Collections.shuffle(list);
-        return list.get(1);
+        return list.get((int) (Math.random() * list.size()));
     }
 
     public static Map<String, Integer> countVowels(List<String> words) {
         Map<String, Integer> countVowelsInTheWord = new HashMap<String, Integer>();
         int countOfVowels = 0;
         for (int i = 0; i < words.size(); i++) {
-            for (int j = 0; j < words.get(i).length(); j++) {
-                if (words.get(i).contains("o") || words.get(i).contains("a") ||
-                        words.get(i).contains("i") || words.get(i).contains("u") ||
-                        words.get(i).contains("e") || words.get(i).contains("y")) {
+            for (int j = 0; j < words.get(i).length(); j++) { //здесь ошибка в методе
+                char ch = words.get(i).charAt(j);
+                if (ch == 'a' || ch == 'e' || ch == 'i' ||
+                        ch == 'o' || ch == 'u' || ch == 'y') {
                     countOfVowels++;
-                    countVowelsInTheWord.put(words.get(1), countOfVowels);
-
                 }
             }
+            countVowelsInTheWord.put(words.get(i), countOfVowels);
         }
         return countVowelsInTheWord;
+    }
+
+    public static int countVowelsString(String s) {
+        int countOfVowels = 0;
+        for (int j = 0; j < s.length(); j++) {
+            char ch = s.charAt(j);
+            if (ch == 'a' || ch == 'e' || ch == 'i' ||
+                    ch == 'o' || ch == 'u' || ch == 'y') {
+                countOfVowels++;
+            }
+        }
+        return countOfVowels;
     }
 }
