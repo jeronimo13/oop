@@ -38,10 +38,10 @@ public class Utils {
     }
 
     public static Map<String, Integer> countVowels(List<String> words) {
-        Map<String, Integer> countVowelsInTheWord = new HashMap<String, Integer>();
-        int countOfVowels = 0;
+        Map countVowelsInTheWord = new HashMap();
         for (int i = 0; i < words.size(); i++) {
-            for (int j = 0; j < words.get(i).length(); j++) { //здесь ошибка в методе
+            int countOfVowels = 0;
+            for (int j = 0; j < words.get(i).length(); j++) {
                 char ch = words.get(i).charAt(j);
                 if (ch == 'a' || ch == 'e' || ch == 'i' ||
                         ch == 'o' || ch == 'u' || ch == 'y') {

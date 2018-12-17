@@ -1,16 +1,10 @@
 package com.ulya.common;
 
-import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.Assert.*;
+import java.util.*;
+import static org.junit.Assert.assertTrue;
 
 public class UtilsTest {
     private List<String> words;
@@ -19,8 +13,8 @@ public class UtilsTest {
     @Before
     public void setup() {
         words = new LinkedList<>();
-        words.add(0,"std");
-        words.add(1,"Herman");
+        words.add(0, "std");
+        words.add(1, "Herman");
         words.add(2, "aaa");
         words.add(3, "ee");
         words.add(4, "y");
@@ -38,6 +32,7 @@ public class UtilsTest {
         Assert.assertEquals(Utils.factorialLoop(1), 1);
         Assert.assertEquals(Utils.factorialLoop(3), 6);
     }
+
     @Test(expected = IllegalArgumentException.class)
     public void factorialNegative() {
         Utils.factorialRec(-1);
@@ -46,21 +41,33 @@ public class UtilsTest {
 
     @Test
     public void getRandomElement() {
-        assertTrue((words.contains(Utils.getRandomElement(words))==true));
+        assertTrue((words.contains(Utils.getRandomElement(words)) == true));
     }
 
     @Test
     public void countVowels() {
-        Map<String, Integer> countVowelsInTheWord = new HashMap<String, Integer>();
-        countVowelsInTheWord.put(words.get(0), 0);
-        countVowelsInTheWord.put(words.get(1), 2);
-        countVowelsInTheWord.put(words.get(2), 3);
-        countVowelsInTheWord.put(words.get(3), 2);
-        countVowelsInTheWord.put(words.get(4), 1);
-        countVowelsInTheWord.put(words.get(5), 0);
-        countVowelsInTheWord.put(words.get(6), 3);
-            Assert.assertEquals(Utils.countVowels(words).keySet(), countVowelsInTheWord.keySet());
+        Map<String, Integer> expectedMap = new HashMap<String, Integer>();
+        expectedMap.put(words.get(0), 0);
+        expectedMap.put(words.get(1), 2);
+        expectedMap.put(words.get(2), 3);
+        expectedMap.put(words.get(3), 2);
+        expectedMap.put(words.get(4), 1);
+        expectedMap.put(words.get(5), 0);
+        expectedMap.put(words.get(6), 3);
+        Map<String, Integer> wordsToIntegerMap = Utils.countVowels(words);
+        Set<String> keySet = wordsToIntegerMap.keySet();
+        Set<String> expectedKeySet = expectedMap.keySet();
+        Assert.assertEquals(keySet, expectedKeySet);
+
+        Iterator<String> iterator = keySet.iterator();
+
+        while (iterator.hasNext()) {
+            String iter = iterator.next();
+            Assert.assertEquals(expectedMap.get(iter), wordsToIntegerMap.get(iter));
+        }
+
     }
+
     @Test
     public void countString() {
         Assert.assertEquals(Utils.countVowelsString(s), 3);
