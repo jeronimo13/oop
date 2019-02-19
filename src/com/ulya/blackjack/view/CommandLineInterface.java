@@ -1,6 +1,7 @@
 package com.ulya.blackjack.view;
 
 
+import com.ulya.blackjack.controller.Deck;
 import com.ulya.blackjack.controller.GameController;
 import com.ulya.blackjack.model.Card;
 import com.ulya.blackjack.model.WinState;
@@ -90,7 +91,7 @@ public class CommandLineInterface {
         controller.requestMore();
         printState(controller);
         List<Card> myHand = controller.getMyHand();
-        if (controller.getCost(myHand) > 21) {
+        if (Deck.costOf(myHand) > 21) {
             finishMessage(controller);
             return false;
         }
@@ -132,7 +133,7 @@ public class CommandLineInterface {
     }
 
     private void format(List<Card> hand) {
-        int total = GameController.getInstance().getCost(hand);
+        int total = Deck.costOf(hand);
 
         for (Card aHand : hand) {
             output.print(aHand.getValues()+" ");

@@ -1,29 +1,32 @@
 package com.ulya.blackjack.model;
 
 public class Card {
-
+private Rank rank;
+private String value;
+private int cost;
+private Suit suit;
     //add private fields!
 	public Card(Rank rank, Suit suit) {
-        //implement me, please!
+        this.rank = rank;
+        this.suit = suit;
+        this.value = rank.getValues();
+        this.cost = rank.getCost();//implement me, please!
     }
 
 	public Rank getRank() {
-	    //implement me, please!
-        throw new UnsupportedOperationException();
+            return this.rank;
     }
 
     public String getValues(){
-        //implement me, please!
-        throw new UnsupportedOperationException();
+
+            return this.value;
     }
 
 	public int getCost() {
-        //implement me, please!
-        throw new UnsupportedOperationException();
+            return this.cost;
     }
 
     public Suit getSuit() {
-        //implement me, please!
-        throw new UnsupportedOperationException();
+            return this.suit;
     }
 }

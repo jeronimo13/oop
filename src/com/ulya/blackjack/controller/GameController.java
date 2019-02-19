@@ -4,21 +4,26 @@ package com.ulya.blackjack.controller;
 import com.ulya.blackjack.model.Card;
 import com.ulya.blackjack.model.WinState;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class GameController {
     private static GameController controller;
+    List<Card> deck;
+    List<Card> userHand;
+    List<Card> dealerHand;
 
     private GameController() {
-        // инициализация переменных тут
+        deck = new ArrayList<>();
+        userHand = new ArrayList<>();
+        dealerHand = new ArrayList<>();// инициализация переменных тут
     }
 
     public static GameController getInstance() {
         if (controller == null) {
             controller = new GameController();
         }
-
         return controller;
     }
 
@@ -40,7 +45,15 @@ public class GameController {
      * @param shuffler shuffle interface
      */
     void newGame(Shuffler shuffler) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        deck = Deck.createDeck(8);
+        shuffler.shuffle(deck);
+        userHand.add(deck.get(0));
+        deck.remove(0);
+        userHand.add(deck.get(0));
+        deck.remove(0);
+        dealerHand.add(deck.get(0));
+        deck.remove(0);
+
     }
 
     /**
@@ -51,23 +64,27 @@ public class GameController {
      * @return true если сумма очков у игрока меньше максимума (или равна) после всех операций и false если больше.
      */
     public boolean requestMore() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (Deck.costOf(userHand) >= 21 || deck.isEmpty()) {
+            return false;
+        }
+        userHand.add(deck.get(0));
+        deck.remove(0);
+        int costOfUserHand = Deck.costOf(userHand);
+        return costOfUserHand <= 21;
     }
 
-    public int getCost(List<Card> deck) {
-        int cost = 0;
-        for (Card d : deck) {
-            cost += d.getCost();
-        }
-        return cost;
-    }
 
     /**
      * Вызывается когда игрок получил все карты и хочет чтобы играло казино (диллер).
      * Сдаем диллеру карты пока у диллера не наберется 17 очков.
      */
     public void requestStop() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int costOfDealerHand = 0;
+        while (costOfDealerHand < 17) {
+            dealerHand.add(deck.get(0));
+            deck.remove(0);
+            costOfDealerHand = Deck.costOf(dealerHand);
+        }
     }
 
     /**
@@ -78,20 +95,33 @@ public class GameController {
      * Если у игрока больше чем у диллера и не перебор - это WinState.WIN (игрок выиграл).
      */
     public WinState getWinState() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int dealerCost = Deck.costOf(dealerHand);
+        int userCost = Deck.costOf(userHand);
+
+        if (userCost > 21) {
+            return WinState.LOOSE;
+        }
+        if (userCost < dealerCost) {
+            return WinState.LOOSE;
+        }
+        if (dealerCost == userCost) {
+            return WinState.PUSH;
+        }
+        return WinState.WIN;
     }
 
     /**
      * Возвращаем руку игрока
      */
     public List<Card> getMyHand() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return userHand;
     }
 
     /**
      * Возвращаем руку диллера
      */
     public List<Card> getDealersHand() {
-        throw new UnsupportedOperationException("Not implemented yet");
+
+        return dealerHand;
     }
 }
