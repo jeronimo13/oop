@@ -84,7 +84,20 @@ public class CommandLineInterface {
      *      Постарайтесь уделить внимание чистоте кода и разделите этот метод на несколько подметодов.
      */
     private boolean execute(String command, GameController controller) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (command.equals(Command.HELP)) {
+            getHelp();
+        }
+        if (command.equals(Command.MORE)) {
+            getMore(controller);
+        }
+        if (command.equals(Command.STOP)) {
+            stop(controller);
+        }
+        if (command.equals(Command.EXIT)) {
+
+            return false;
+        }
+        return true;
     }
 
     private boolean getMore(GameController controller) {

@@ -3,7 +3,6 @@ package com.ulya.blackjack.controller;
 
 import com.ulya.blackjack.model.Card;
 import com.ulya.blackjack.model.WinState;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +14,7 @@ public class GameController {
     List<Card> dealerHand;
 
     private GameController() {
+
         deck = new ArrayList<>();
         userHand = new ArrayList<>();
         dealerHand = new ArrayList<>();// инициализация переменных тут
@@ -100,6 +100,9 @@ public class GameController {
 
         if (userCost > 21) {
             return WinState.LOOSE;
+        }
+        if (dealerCost > 21) {
+            return WinState.WIN;
         }
         if (userCost < dealerCost) {
             return WinState.LOOSE;
